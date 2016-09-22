@@ -20,22 +20,15 @@ var OpenStreetMap_Mapnik = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x
 
 }).addTo(mymap);
 
-
-/*
-L.CRS.EPSG3857.unproject = function (point){ // Point -> LatLng
-  var earthRadius = 6378137;
-      projectionPoint = L.point(point).divideBy(earthRadius);
-
-  return this.projection.unproject(projectionPoint);
-};
-*/
-
-var events = datab; //   JSON.parse(data)
+var events = datab; //   first 30
 
 mintime = events[0].attributes.Time_Begun;
 maxtime = events[0].attributes.Time_Begun;
 
+function make(test){
+
  for(i = 0; i < events.length; i++){
+ 	if ( events[i].attributes.Time_Begun > test ){
  	if ( events[i].attributes.Time_Begun < mintime ){
       mintime = events[i].attributes.Time_Begun; 	
  	};
@@ -60,47 +53,29 @@ maxtime = events[0].attributes.Time_Begun;
  	 )
     	 
  	{
-   // console.log("events[", i,"] ", events[i],"x", events[i].geometry.x); 
-     ocoords[0] = events[i].geometry.x;
-     ocoords[1] = events[i].geometry.y;
-   //  console.log("ocoords",ocoords);
+   
      
      var point = new L.Point(events[i].geometry.x, events[i].geometry.y);
-   //  console.log("point",point);
-     
-   //  var earthRadius = 6378137;
-     var latlng = L.Projection.SphericalMercator.unproject(
-               point);  //.divideBy(earthRadius));
-     console.log("latlng",latlng); //returns latlon
+  
+     var latlng = L.Projection.SphericalMercator.unproject(point);  
+  
      new L.Marker([latlng.lat, latlng.lng],{bounceOnAdd: true}).addTo(mymap);
      
     }
     } 
     
     };
+ };
+ }
+ 
+ make(0);
+ 
+ var events = data; //   second 30
+ 
+ make(maxtime);
 
     console.log("mintime", mintime, "maxtime", maxtime);
     var ntime = moment(mintime).format("MMM Do YY h:mm:ss a");
     var xtime = moment(maxtime).format("MMM Do YY h:mm:ss a");
     console.log("ntime", ntime, "xtime", xtime);
     
-
-/*	var events = JSON.parse(raw); 
-	alert(events[0].Offense);
-	alert(events[1].Offense);
-
-
-for (i = 0; i < acc.length; i++){
-    acc[i].onclick = function(){
-    	  
-        this.classList.toggle("active");
-        this.nextElementSibling.classList.toggle("show");
-    }
-}
-test = new Date()
-month = test.getMonth()
-month = (month * 1) + 1
-day = test.getDate()
-year = test.getFullYear()
-document.write(" ",month,"/",day,"/",year," ")
-*/
