@@ -9,10 +9,79 @@ var mintime = 0;
 var maxtime = 0;
 
 
-var mymap = L.map('mapid').setView(coords, 17);
+var mymap = L.map('mapid').setView(coords, 13);
 
+var redIcon = new L.Icon({
+  iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
 
+var greenIcon = new L.Icon({
+  iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
 
+var blueIcon = new L.Icon({
+  iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+
+var yellowIcon = new L.Icon({
+  iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-yellow.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+
+var violetIcon = new L.Icon({
+  iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-violet.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+
+var blackIcon = new L.Icon({
+  iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-black.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+
+var orangeIcon = new L.Icon({
+  iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-orange.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+
+var greyIcon = new L.Icon({
+  iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-grey.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
 
 var OpenStreetMap_Mapnik = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
 	maxZoom: 19,
@@ -58,8 +127,48 @@ function make(test){
      var point = new L.Point(events[i].geometry.x, events[i].geometry.y);
   
      var latlng = L.Projection.SphericalMercator.unproject(point);  
-  
-     new L.Marker([latlng.lat, latlng.lng],{bounceOnAdd: true}).addTo(mymap);
+     
+     if ( events[i].attributes.Offense == "Theft" )
+     { 
+     new L.Marker([latlng.lat, latlng.lng], {icon: greenIcon},{bounceOnAdd: true}).addTo(mymap);
+     }
+     
+      else if ( events[i].attributes.Offense == "Burglary" )
+       { 
+        new L.Marker([latlng.lat, latlng.lng], {icon: blueIcon},{bounceOnAdd: true}).addTo(mymap);
+       }
+      
+       
+        else if( events[i].attributes.Offense == "Robbery" )
+        { 
+         new L.Marker([latlng.lat, latlng.lng], {icon: redIcon},{bounceOnAdd: true}).addTo(mymap);
+        }
+        
+          else if( events[i].attributes.Offense == "Aggravated Assault" )
+          { 
+           new L.Marker([latlng.lat, latlng.lng], {icon: violetIcon},{bounceOnAdd: true}).addTo(mymap);
+          }
+          
+            else if( events[i].attributes.Offense == "Auto Theft" )
+            { 
+             new L.Marker([latlng.lat, latlng.lng], {icon: blackIcon},{bounceOnAdd: true}).addTo(mymap);
+            }
+            
+               else if( events[i].attributes.Offense == "Murder" )
+               { 
+                new L.Marker([latlng.lat, latlng.lng], {icon: orangeIcon},{bounceOnAdd: true}).addTo(mymap);
+               }
+               
+                  else if( events[i].attributes.Offense == "Rape" )
+                  { 
+                   new L.Marker([latlng.lat, latlng.lng], {icon: yellowIcon},{bounceOnAdd: true}).addTo(mymap);
+                  }
+        
+        else 
+        {
+         new L.Marker([latlng.lat, latlng.lng], {icon: greyIcon},{bounceOnAdd: true}).addTo(mymap);
+        }
+     
      
     }
     } 
