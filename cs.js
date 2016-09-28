@@ -1,4 +1,3 @@
-var acc = document.getElementsByClassName("accordion");
 var i;
 var coords = [29.801902, -95.365821];
 var ocoords = [29.801902, -95.365821];
@@ -21,7 +20,7 @@ var maxtime = 0;
 
 var mymap = L.map('mapid').setView(coords, 13);
 
-var redIcon = new L.Icon({
+var Robbery = new L.Icon({
   iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
   iconSize: [25, 41],
@@ -30,7 +29,7 @@ var redIcon = new L.Icon({
   shadowSize: [41, 41]
 });
 
-var greenIcon = new L.Icon({
+var Theft = new L.Icon({
   iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png',
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
   iconSize: [25, 41],
@@ -39,7 +38,7 @@ var greenIcon = new L.Icon({
   shadowSize: [41, 41]
 });
 
-var blueIcon = new L.Icon({
+var Burglary = new L.Icon({
   iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png',
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
   iconSize: [25, 41],
@@ -48,7 +47,7 @@ var blueIcon = new L.Icon({
   shadowSize: [41, 41]
 });
 
-var yellowIcon = new L.Icon({
+var Rape = new L.Icon({
   iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-yellow.png',
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
   iconSize: [25, 41],
@@ -57,7 +56,7 @@ var yellowIcon = new L.Icon({
   shadowSize: [41, 41]
 });
 
-var violetIcon = new L.Icon({
+var Aggravated_Assault = new L.Icon({
   iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-violet.png',
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
   iconSize: [25, 41],
@@ -66,7 +65,7 @@ var violetIcon = new L.Icon({
   shadowSize: [41, 41]
 });
 
-var blackIcon = new L.Icon({
+var Auto_Theft = new L.Icon({
   iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-black.png',
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
   iconSize: [25, 41],
@@ -75,7 +74,7 @@ var blackIcon = new L.Icon({
   shadowSize: [41, 41]
 });
 
-var orangeIcon = new L.Icon({
+var Murder = new L.Icon({
   iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-orange.png',
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
   iconSize: [25, 41],
@@ -146,38 +145,38 @@ function make(test){
      
      if ( events[i].attributes.Offense == "Theft" )
       { 
-       new L.Marker([latlng.lat, latlng.lng], {icon: greenIcon},{bounceOnAdd: true}).bindPopup(customPopup,customOptions).addTo(mymap);
+       new L.Marker([latlng.lat, latlng.lng], {icon: Theft},{bounceOnAdd: true}).bindPopup(customPopup,customOptions).addTo(mymap);
       }
      
       else if ( events[i].attributes.Offense == "Burglary" )
        { 
-        new L.Marker([latlng.lat, latlng.lng], {icon: blueIcon},{bounceOnAdd: true}).bindPopup(customPopup,customOptions).addTo(mymap);
+        new L.Marker([latlng.lat, latlng.lng], {icon: Burglary},{bounceOnAdd: true}).bindPopup(customPopup,customOptions).addTo(mymap);
        }
       
        
         else if( events[i].attributes.Offense == "Robbery" )
         { 
-         new L.Marker([latlng.lat, latlng.lng], {icon: redIcon},{bounceOnAdd: true}).bindPopup(customPopup,customOptions).addTo(mymap);
+         new L.Marker([latlng.lat, latlng.lng], {icon: Robbery},{bounceOnAdd: true}).bindPopup(customPopup,customOptions).addTo(mymap);
         }
         
           else if( events[i].attributes.Offense == "Aggravated Assault" )
           { 
-           new L.Marker([latlng.lat, latlng.lng], {icon: violetIcon},{bounceOnAdd: true}).bindPopup(customPopup,customOptions).addTo(mymap);
+           new L.Marker([latlng.lat, latlng.lng], {icon: Aggravated_Assault},{bounceOnAdd: true}).bindPopup(customPopup,customOptions).addTo(mymap);
           }
           
             else if( events[i].attributes.Offense == "Auto Theft" )
             { 
-             new L.Marker([latlng.lat, latlng.lng], {icon: blackIcon},{bounceOnAdd: true}).bindPopup(customPopup,customOptions).addTo(mymap);
+             new L.Marker([latlng.lat, latlng.lng], {icon: Auto_Theft},{bounceOnAdd: true}).bindPopup(customPopup,customOptions).addTo(mymap);
             }
             
                else if( events[i].attributes.Offense == "Murder" )
                { 
-                new L.Marker([latlng.lat, latlng.lng], {icon: orangeIcon},{bounceOnAdd: true}).bindPopup(customPopup,customOptions).addTo(mymap);
+                new L.Marker([latlng.lat, latlng.lng], {icon: Murder},{bounceOnAdd: true}).bindPopup(customPopup,customOptions).addTo(mymap);
                }
                
                   else if( events[i].attributes.Offense == "Rape" )
                   { 
-                   new L.Marker([latlng.lat, latlng.lng], {icon: yellowIcon},{bounceOnAdd: true}).bindPopup(customPopup,customOptions).addTo(mymap);
+                   new L.Marker([latlng.lat, latlng.lng], {icon: Rape},{bounceOnAdd: true}).bindPopup(customPopup,customOptions).addTo(mymap);
                   }
         
         else 
@@ -193,14 +192,42 @@ function make(test){
  };
  }
  
- make(0);
+  make(0);
  
- var events = data; //   second 30
+  var events = data; //   second 30
  
- make(maxtime);
+  make(maxtime);
+ 
+  var events = datal; //   third 30
+ 
+  make(maxtime);
 
     console.log("mintime", mintime, "maxtime", maxtime);
     var ntime = moment(mintime).format("MMM Do YY h:mm:ss a");
     var xtime = moment(maxtime).format("MMM Do YY h:mm:ss a");
     console.log("ntime", ntime, "xtime", xtime);
     
+var legend = L.control({position: 'topright'});
+
+legend.onAdd = function (mymap) {
+
+    var div = L.DomUtil.create('div', 'info legend'),
+        grades = [" Theft"," Robbery"," Burglary"," Auto_Theft"," Aggravated_Assault"," Murder"," Rape"],
+        labels = ['https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png',
+                  'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
+                  'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png',
+                  'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-black.png',
+                  'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-violet.png',
+                  'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-orange.png',
+                  'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-yellow.png'];
+
+    // loop through our density intervals and generate a label with a colored square for each interval
+    for (var i = 0; i < grades.length; i++) {
+        div.innerHTML +=
+             (" <img src="+ labels[i] +" >") + grades[i] +'<br>';
+    }
+
+    return div;
+};
+
+legend.addTo(mymap);
