@@ -98,6 +98,31 @@ var OpenStreetMap_Mapnik = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x
 
 }).addTo(mymap);
 
+var legend = L.control({position: 'topright'});
+
+legend.onAdd = function (mymap) {
+
+    var div = L.DomUtil.create('div', 'info legend'),
+        grades = [" Theft"," Robbery"," Burglary"," Auto_Theft"," Aggravated_Assault"," Murder"," Rape"],
+        labels = ['https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png',
+                  'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
+                  'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png',
+                  'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-black.png',
+                  'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-violet.png',
+                  'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-orange.png',
+                  'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-yellow.png'];
+
+    // loop through our density intervals and generate a label with a colored square for each interval
+    for (var i = 0; i < grades.length; i++) {
+        div.innerHTML +=
+             (" <img src="+ labels[i] +" >") + grades[i] +'<br>';
+    }
+
+    return div;
+};
+
+legend.addTo(mymap);
+
 var events = datab; //   first 30
 
 mintime = events[0].attributes.Time_Begun;
@@ -207,27 +232,3 @@ function make(test){
     var xtime = moment(maxtime).format("MMM Do YY h:mm:ss a");
     console.log("ntime", ntime, "xtime", xtime);
     
-var legend = L.control({position: 'topright'});
-
-legend.onAdd = function (mymap) {
-
-    var div = L.DomUtil.create('div', 'info legend'),
-        grades = [" Theft"," Robbery"," Burglary"," Auto_Theft"," Aggravated_Assault"," Murder"," Rape"],
-        labels = ['https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png',
-                  'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
-                  'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png',
-                  'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-black.png',
-                  'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-violet.png',
-                  'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-orange.png',
-                  'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-yellow.png'];
-
-    // loop through our density intervals and generate a label with a colored square for each interval
-    for (var i = 0; i < grades.length; i++) {
-        div.innerHTML +=
-             (" <img src="+ labels[i] +" >") + grades[i] +'<br>';
-    }
-
-    return div;
-};
-
-legend.addTo(mymap);
