@@ -6,6 +6,18 @@ var scoords = [29.801902, -95.365821];
 var events = [];
 var mintime = 0;
 var maxtime = 0;
+var burglaries = new L.LayerGroup();
+var robberies = new L.LayerGroup();
+var aggravated_assaults = new L.LayerGroup();
+var thefts = new L.LayerGroup();
+var auto_thefts = new L.LayerGroup();
+var rapes = new L.LayerGroup();
+var murders = new L.LayerGroup();
+var burglaryLayerGroup = false;
+var layerControl = false;
+var bluestring = ` `;
+
+    
 
  // create popup contents
     var customPopup = "Mozilla Toronto Offices<br/><img src='http://joshuafrazier.info/images/maptime.gif' alt='maptime logo gif' width='350px'/>";
@@ -18,8 +30,12 @@ var maxtime = 0;
         }
     
 
-var mymap = L.map('mapid').setView(coords, 13);
-
+var mymap = L.map('mapid',{
+			    layers: [thefts] // only add one!
+		    }).setView(coords, 13);
+   var overlays = {
+			"Thefts": thefts
+		};
 var Robbery = new L.Icon({
   iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
@@ -98,7 +114,7 @@ var OpenStreetMap_Mapnik = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x
 
 }).addTo(mymap);
 
-var legend = L.control({position: 'topright'});
+var legend = L.control({position: 'bottomleft'});
 
 legend.onAdd = function (mymap) {
 
@@ -170,38 +186,38 @@ function make(test){
      
      if ( events[i].attributes.Offense == "Theft" )
       { 
-       new L.Marker([latlng.lat, latlng.lng], {icon: Theft},{bounceOnAdd: true}).bindPopup(customPopup,customOptions).addTo(mymap);
+       new L.Marker([latlng.lat, latlng.lng], {icon: Theft},{bounceOnAdd: true}).bindPopup(customPopup,customOptions).addTo(thefts);
       }
      
       else if ( events[i].attributes.Offense == "Burglary" )
        { 
-        new L.Marker([latlng.lat, latlng.lng], {icon: Burglary},{bounceOnAdd: true}).bindPopup(customPopup,customOptions).addTo(mymap);
+        new L.Marker([latlng.lat, latlng.lng], {icon: Burglary},{bounceOnAdd: true}).bindPopup(customPopup,customOptions).addTo(burglaries);
        }
       
        
         else if( events[i].attributes.Offense == "Robbery" )
         { 
-         new L.Marker([latlng.lat, latlng.lng], {icon: Robbery},{bounceOnAdd: true}).bindPopup(customPopup,customOptions).addTo(mymap);
+         new L.Marker([latlng.lat, latlng.lng], {icon: Robbery},{bounceOnAdd: true}).bindPopup(customPopup,customOptions).addTo(robberies);
         }
         
           else if( events[i].attributes.Offense == "Aggravated Assault" )
           { 
-           new L.Marker([latlng.lat, latlng.lng], {icon: Aggravated_Assault},{bounceOnAdd: true}).bindPopup(customPopup,customOptions).addTo(mymap);
+           new L.Marker([latlng.lat, latlng.lng], {icon: Aggravated_Assault},{bounceOnAdd: true}).bindPopup(customPopup,customOptions).addTo(aggravated_assaults);
           }
           
             else if( events[i].attributes.Offense == "Auto Theft" )
             { 
-             new L.Marker([latlng.lat, latlng.lng], {icon: Auto_Theft},{bounceOnAdd: true}).bindPopup(customPopup,customOptions).addTo(mymap);
+             new L.Marker([latlng.lat, latlng.lng], {icon: Auto_Theft},{bounceOnAdd: true}).bindPopup(customPopup,customOptions).addTo(auto_thefts);
             }
             
                else if( events[i].attributes.Offense == "Murder" )
                { 
-                new L.Marker([latlng.lat, latlng.lng], {icon: Murder},{bounceOnAdd: true}).bindPopup(customPopup,customOptions).addTo(mymap);
+                new L.Marker([latlng.lat, latlng.lng], {icon: Murder},{bounceOnAdd: true}).bindPopup(customPopup,customOptions).addTo(murders);
                }
                
                   else if( events[i].attributes.Offense == "Rape" )
                   { 
-                   new L.Marker([latlng.lat, latlng.lng], {icon: Rape},{bounceOnAdd: true}).bindPopup(customPopup,customOptions).addTo(mymap);
+                   new L.Marker([latlng.lat, latlng.lng], {icon: Rape},{bounceOnAdd: true}).bindPopup(customPopup,customOptions).addTo(rapes);
                   }
         
         else 
@@ -217,6 +233,7 @@ function make(test){
  };
  }
  
+ 
   make(0);
  
   var events = data; //   second 30
@@ -231,4 +248,24 @@ function make(test){
     var ntime = moment(mintime).format("MMM Do YY h:mm:ss a");
     var xtime = moment(maxtime).format("MMM Do YY h:mm:ss a");
     console.log("ntime", ntime, "xtime", xtime);
+ 
+    if(burglaryLayerGroup === false) {
+    	   	
+    }
+      
+    if(layerControl === false) {
+        layerControl = L.control.layers().addTo(mymap);
+    }
     
+ //   layerControl.addOverlay(burglaryLayerGroup, "Burglaries").addTo(mymap);
+        
+      layerControl.addOverlay(thefts, "Thefts").addTo(mymap);      
+      layerControl.addOverlay(robberies, "Robberies").addTo(mymap);  
+      layerControl.addOverlay(burglaries, "Burglaries").addTo(mymap);  
+      layerControl.addOverlay(aggravated_assaults, "Aggravated Assaults").addTo(mymap);  
+      layerControl.addOverlay(auto_thefts, "Auto Thefts").addTo(mymap);  
+      layerControl.addOverlay(rapes, "Rapes").addTo(mymap);  
+      layerControl.addOverlay(murders, "Murders").addTo(mymap);  
+        
+         
+ //   return false;
