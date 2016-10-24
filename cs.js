@@ -243,6 +243,10 @@ function make(test){
   var events = datal; //   third 30
  
   make(maxtime);
+  
+  var events = dataoct; //   fourth 30
+ 
+  make(maxtime);
 
     console.log("mintime", mintime, "maxtime", maxtime);
     var ntime = moment(mintime).format("MMM Do YY h:mm:ss a");
