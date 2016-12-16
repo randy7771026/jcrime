@@ -139,10 +139,7 @@ legend.onAdd = function (mymap) {
 
 legend.addTo(mymap);
 
-var events = datab; //   first 30
 
-mintime = events[0].attributes.Time_Begun;
-maxtime = events[0].attributes.Time_Begun;
 
 function make(test){
 
@@ -233,9 +230,13 @@ function make(test){
  };
  }
  
- 
+ var events = s1; //   first 30
+
+ mintime = events[0].attributes.Time_Begun;
+ maxtime = events[0].attributes.Time_Begun;
+
   make(0);
- 
+/*
   var events = data; //   second 30
  
   make(maxtime);
@@ -244,10 +245,16 @@ function make(test){
  
   make(maxtime);
   
-  var events = dataoct; //   fourth 30
+  var events = dataoct; //   October 23rd 30
  
   make(maxtime);
+  
+  var events = datanov; //   November 22nd 30
+ 
+  make(maxtime);
+*/
 
+    console.log("i", i );
     console.log("mintime", mintime, "maxtime", maxtime);
     var ntime = moment(mintime).format("MMM Do YY h:mm:ss a");
     var xtime = moment(maxtime).format("MMM Do YY h:mm:ss a");
